@@ -1,0 +1,31 @@
+# Secrets
+.env
+
+# DB & logs
+chatbot/conversations.db
+chatbot/webhook_log.txt
+
+# Python cache
+chatbot/__pycache__/
+__pycache__/
+*.pyc
+*.pyo
+
+# Chỉ cần chatbot — loại trừ nội dung cá nhân
+0 Việc Hôm Nay/
+1 agents ( Nhân Viên )/
+2 Kinh Doanh/
+3 Dự Án/
+4 Hệ Thống/
+5 Wiki (Kiến Thức Của Não)/
+6 raw/
+7 Clippings/
+_templates/
+agents/
+raw/
+vault/
+.claude/
+.obsidian/
+4 scripts (liên quan tới token)/
+*.sync-conflict*
+.DS_Store
