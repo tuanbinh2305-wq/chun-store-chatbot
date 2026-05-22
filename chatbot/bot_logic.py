@@ -50,20 +50,26 @@ def _ask_claude(sender_id: str, user_message: str) -> str:
     try:
         client = _get_client()
         resp = client.messages.create(
-            model="claude-haiku-4-5-20251001",
+            model="claude-3-5-haiku-20241022",
             max_tokens=500,
             system=get_system_prompt(),
             messages=messages,
         )
         return resp.content[0].text.strip()
     except anthropic.APIError as e:
-        print(f"[bot_logic] Claude API lỗi: {e}")
+        import sys
+        print(f"[bot_logic] Claude API lỗi: {e}", flush=True)
+        sys.stderr.write(f"[bot_logic] Claude API lỗi: {e}\n")
+        sys.stderr.flush()
         return (
             "Ôi, em đang gặp chút sự cố kỹ thuật 😅 "
             "Chị nhắn lại sau ít phút hoặc gọi hotline để em hỗ trợ nhé ạ!"
         )
     except Exception as e:
-        print(f"[bot_logic] Lỗi không xác định: {e}")
+        import sys
+        print(f"[bot_logic] Lỗi không xác định: {type(e).__name__}: {e}", flush=True)
+        sys.stderr.write(f"[bot_logic] Lỗi không xác định: {type(e).__name__}: {e}\n")
+        sys.stderr.flush()
         return "Em xin lỗi, có lỗi xảy ra. Chị thử lại sau ít phút nhé ạ!"
 
 
