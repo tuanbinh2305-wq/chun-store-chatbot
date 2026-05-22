@@ -50,7 +50,7 @@ def _ask_claude(sender_id: str, user_message: str) -> str:
     try:
         client = _get_client()
         resp = client.messages.create(
-            model="claude-sonnet-4-5",
+            model="claude-haiku-4-5-20251001",
             max_tokens=500,
             system=get_system_prompt(),
             messages=messages,
