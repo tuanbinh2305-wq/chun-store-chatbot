@@ -1,11 +1,11 @@
 """
-Logic chính của chatbot — Hybrid (kịch bản + Gemini AI).
+Logic chính của chatbot — Hybrid (kịch bản + Claude AI).
 
 Luồng xử lý:
 1. Nhận tin nhắn từ KH
 2. Kiểm tra kịch bản cố định (scenarios.py)
    → Khớp → Trả lời kịch bản ngay (nhanh, chính xác)
-   → Không khớp → Gọi Gemini AI (thông minh, linh hoạt)
+   → Không khớp → Gọi Claude AI (thông minh, linh hoạt)
 3. Lưu lịch sử vào DB
 4. Gửi reply về Messenger
 """
@@ -22,42 +22,44 @@ import messenger
 
 load_dotenv(Path(__file__).parent.parent / ".env")
 
-_model = None
+_client = None
 
 
-def _get_model():
-    global _model
-    if _model is None:
-        import google.generativeai as genai
-        api_key = os.getenv("GEMINI_API_KEY")
+def _get_client():
+    global _client
+    if _client is None:
+        import anthropic
+        api_key = os.getenv("ANTHROPIC_API_KEY")
         if not api_key:
-            raise ValueError("GEMINI_API_KEY chưa được cấu hình")
-        genai.configure(api_key=api_key)
-        _model = genai.GenerativeModel(
-            model_name="gemini-2.0-flash",
-            system_instruction=get_system_prompt(),
-        )
-    return _model
+            raise ValueError("ANTHROPIC_API_KEY chưa được cấu hình")
+        _client = anthropic.Anthropic(api_key=api_key)
+    return _client
 
 
-def _ask_gemini(sender_id: str, user_message: str) -> str:
+def _ask_claude(sender_id: str, user_message: str) -> str:
     history = get_history(sender_id)
 
-    # Chuyển history sang format Gemini
-    gemini_history = []
+    # Chuyển history sang format Claude
+    messages = []
     for msg in history:
-        role = "user" if msg["role"] == "user" else "model"
-        gemini_history.append({"role": role, "parts": [msg["content"]]})
+        role = "user" if msg["role"] == "user" else "assistant"
+        messages.append({"role": role, "content": msg["content"]})
+
+    # Thêm tin nhắn hiện tại
+    messages.append({"role": "user", "content": user_message})
 
     try:
-        model = _get_model()
-        import google.generativeai as genai
-        chat = model.start_chat(history=gemini_history)
-        resp = chat.send_message(user_message)
-        return resp.text.strip()
+        client = _get_client()
+        resp = client.messages.create(
+            model="claude-3-5-haiku-20241022",
+            max_tokens=512,
+            system=get_system_prompt(),
+            messages=messages,
+        )
+        return resp.content[0].text.strip()
     except Exception as e:
-        print(f"[bot_logic] Gemini lỗi: {type(e).__name__}: {e}", flush=True)
-        sys.stderr.write(f"[bot_logic] Gemini lỗi: {type(e).__name__}: {e}\n")
+        print(f"[bot_logic] Claude lỗi: {type(e).__name__}: {e}", flush=True)
+        sys.stderr.write(f"[bot_logic] Claude lỗi: {type(e).__name__}: {e}\n")
         sys.stderr.flush()
         return (
             "Ôi, em đang gặp chút sự cố kỹ thuật 😅 "
@@ -89,7 +91,7 @@ def handle_message(sender_id: str, message_text: str) -> None:
             messenger.send_text(sender_id, reply)
 
     else:
-        reply = _ask_gemini(sender_id, text)
+        reply = _ask_claude(sender_id, text)
         save_message(sender_id, "assistant", reply)
         messenger.send_typing_off(sender_id)
         messenger.send_text(sender_id, reply)
