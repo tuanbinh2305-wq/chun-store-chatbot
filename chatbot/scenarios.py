@@ -11,6 +11,12 @@ Lưu ý keyword:
 - Bao gồm cả dạng viết tắt (bn, sdt, k, ko, mk, j)
 - Bao gồm cả dạng không dấu (gia, bao nhieu)
 - Thứ tự SCENARIOS quan trọng: scenario đầu khớp trước sẽ được dùng
+
+Tone: Viết như nhân viên THẬT nhắn tin — tự nhiên, không robot.
+- Bớt emoji (1-2 cái/tin, KHÔNG rải đều)
+- Bớt bullet point, viết liền mạch
+- Không phải câu nào cũng "Dạ... ạ"
+- Mỗi tin khác tone 1 chút cho không bị lặp
 """
 
 from dataclasses import dataclass, field
@@ -42,68 +48,55 @@ SCENARIOS: list[Scenario] = [
             "cho chị đặt", "muốn đặt", "đặt nha", "đặt nhé",
         ],
         response=(
-            "Dạ để em hỗ trợ chị đặt hàng ạ! 🛒\n\n"
-            "Chị cho em biết:\n"
-            "1️⃣ Sản phẩm muốn mua (khay tủ lạnh / kệ dán / hộp xoay / combo)\n"
-            "2️⃣ Tên người nhận\n"
-            "3️⃣ Số điện thoại\n"
-            "4️⃣ Địa chỉ giao hàng\n\n"
-            "Em sẽ xác nhận đơn và báo phí ship sau ạ 😊"
+            "Okk chị, để em lên đơn nha!\n\n"
+            "Chị gửi em mấy thông tin:\n"
+            "- Sản phẩm muốn lấy (khay tủ lạnh / kệ dán / hộp xoay / combo)\n"
+            "- Tên + SĐT người nhận\n"
+            "- Địa chỉ giao hàng\n\n"
+            "Em xác nhận đơn rồi báo phí ship cho chị liền ạ"
         ),
-        quick_replies=["🎁 Muốn mua combo", "🧊 Muốn mua khay tủ lạnh", "🔩 Muốn mua kệ dán tường"],
+        quick_replies=["Muốn mua combo", "Muốn mua khay tủ lạnh", "Muốn mua kệ dán tường"],
     ),
 
     # 2. MUỐN MUA COMBO
     Scenario(
         keywords=["muốn mua combo", "đặt combo", "lấy combo", "chốt combo", "mua bộ"],
         response=(
-            "Chị chọn combo đúng rồi — tiết kiệm nhất luôn ạ! 🎁\n\n"
-            "💰 Combo 3 SP: 419.000đ – 599.000đ (tiết kiệm ~30%)\n"
-            "📦 Bao gồm: Khay tủ lạnh + Kệ dán + Hộp xoay\n"
-            "🎀 Tặng kèm: Ebook + Video hướng dẫn setup\n"
-            "🚚 Freeship cho đơn từ 499K\n\n"
-            "Chị cho em thông tin để đặt nhé:\n"
-            "• Tên người nhận\n"
-            "• SĐT\n"
-            "• Địa chỉ giao hàng"
+            "Chị chọn combo là tiết kiệm nhất luôn á!\n\n"
+            "Combo 3 SP giá 419K – 599K, tiết kiệm ~30% so với mua lẻ. "
+            "Gồm khay tủ lạnh + kệ dán + hộp xoay, tặng thêm ebook + video hướng dẫn setup. "
+            "Đơn từ 499K em freeship luôn nha.\n\n"
+            "Chị gửi em tên, SĐT, địa chỉ để em lên đơn nhé!"
         ),
-        quick_replies=["📋 Xem bảng giá", "🚚 Thông tin ship"],
+        quick_replies=["Xem bảng giá", "Thông tin ship"],
     ),
 
     # 3. MUỐN MUA KHAY TỦ LẠNH
     Scenario(
         keywords=["muốn mua khay tủ lạnh", "mua khay", "lấy khay", "đặt khay"],
         response=(
-            "Dạ khay tủ lạnh bên em có nhiều size ạ:\n\n"
-            "📏 Size S (nhỏ): 89.000đ — vừa ngăn nhỏ\n"
-            "📏 Size M (trung): 109.000đ — phổ biến nhất\n"
-            "📏 Size L (lớn): 149.000đ — ngăn rau củ\n\n"
-            "✅ Nhựa PP an toàn, chịu lạnh -20°C\n"
-            "✅ Trong suốt, dễ nhìn thực phẩm\n\n"
-            "Chị muốn lấy size nào ạ? Cho em thêm:\n"
-            "• Tên người nhận\n"
-            "• SĐT\n"
-            "• Địa chỉ giao hàng"
+            "Khay tủ lạnh bên em có 3 size nè chị:\n"
+            "- Size S (nhỏ): 89K — vừa ngăn nhỏ để trứng, gia vị\n"
+            "- Size M (trung): 109K — cái này phổ biến nhất\n"
+            "- Size L (lớn): 149K — để rau củ rộng rãi\n\n"
+            "Nhựa PP an toàn, chịu lạnh -20°C luôn. "
+            "Chị muốn lấy size nào? Gửi em thông tin em lên đơn nha"
         ),
-        quick_replies=["🎁 Xem combo tiết kiệm hơn", "🚚 Phí ship bao nhiêu"],
+        quick_replies=["Xem combo tiết kiệm hơn", "Phí ship bao nhiêu"],
     ),
 
     # 4. MUỐN MUA KỆ DÁN TƯỜNG
     Scenario(
         keywords=["muốn mua kệ dán tường", "muốn mua kệ", "mua kệ", "lấy kệ", "đặt kệ"],
         response=(
-            "Dạ kệ dán tường bên em có 2 loại ạ:\n\n"
-            "🔩 Kệ 1 tầng: 129.000đ — gọn gàng\n"
-            "🔩 Kệ 2 tầng: 199.000đ — để được nhiều hơn\n\n"
-            "✅ Inox 304 chống gỉ, chống nước\n"
-            "✅ Dán nano chịu 5kg — gỡ không hỏng tường\n"
-            "✅ Phù hợp nhà thuê, không cần khoan\n\n"
-            "Chị muốn lấy loại nào ạ? Cho em thêm:\n"
-            "• Tên người nhận\n"
-            "• SĐT\n"
-            "• Địa chỉ giao hàng"
+            "Kệ dán tường có 2 loại nè chị:\n"
+            "- 1 tầng: 129K — gọn, để gia vị vừa đẹp\n"
+            "- 2 tầng: 199K — để được nhiều hơn\n\n"
+            "Inox 304 chống gỉ, dán nano chịu 5kg. "
+            "Gỡ ra không hỏng tường luôn nên nhà thuê dùng thoải mái.\n\n"
+            "Chị lấy loại nào? Gửi em tên, SĐT, địa chỉ em ship nha"
         ),
-        quick_replies=["🎁 Xem combo tiết kiệm hơn", "🚚 Phí ship bao nhiêu"],
+        quick_replies=["Xem combo tiết kiệm hơn", "Phí ship bao nhiêu"],
     ),
 
     # ═══════════════════════════════════════════
@@ -119,33 +112,28 @@ SCENARIOS: list[Scenario] = [
             "inbox giá", "pm giá", "báo giá",
         ],
         response=(
-            "Dạ bảng giá Chun Store ạ:\n\n"
-            "🧊 Khay tủ lạnh: 89K – 149K\n"
-            "🔩 Kệ dán tường (không khoan): 129K – 199K\n"
-            "🌀 Hộp gia vị xoay 360°: 169K – 249K\n"
-            "🎁 Combo 3 SP: 419K – 599K (tiết kiệm 30%)\n\n"
-            "👉 Mua combo tiết kiệm nhất + được tặng ebook & video hướng dẫn setup ạ!\n\n"
-            "Chị quan tâm sản phẩm nào ạ?"
+            "Giá bên em nè chị:\n\n"
+            "Khay tủ lạnh: 89K – 149K\n"
+            "Kệ dán tường: 129K – 199K\n"
+            "Hộp gia vị xoay: 169K – 249K\n"
+            "Combo 3 SP: 419K – 599K (tiết kiệm 30%)\n\n"
+            "Mua combo là hời nhất, được tặng thêm ebook + video hướng dẫn setup bếp đẹp nữa. "
+            "Chị quan tâm cái nào nhất?"
         ),
-        quick_replies=["🎁 Xem combo", "🛒 Đặt hàng ngay", "🚚 Thông tin ship"],
+        quick_replies=["Xem combo", "Đặt hàng ngay", "Thông tin ship"],
     ),
 
     # 6. COMBO
     Scenario(
         keywords=["combo", "bộ", "set", "mua combo", "xem combo"],
         response=(
-            "🎁 Combo 3 sản phẩm Chun Store:\n\n"
-            "✅ Khay tổ chức tủ lạnh\n"
-            "✅ Kệ gia vị dán tường không khoan\n"
-            "✅ Hộp gia vị xoay 360°\n\n"
-            "💰 Giá combo: 419K – 599K (tiết kiệm ~30%)\n\n"
-            "🎀 Tặng kèm:\n"
-            "• Ebook \"7 ngày bếp đẹp kiểu Hàn\"\n"
-            "• Video hướng dẫn setup\n\n"
-            "Cả 3 đồng bộ tone trắng/gỗ — bếp nhìn xịn hẳn ạ 🏠✨\n\n"
-            "Chị muốn đặt combo không ạ?"
+            "Combo 3 SP gồm: Khay tủ lạnh + Kệ dán tường + Hộp gia vị xoay\n\n"
+            "Giá 419K – 599K, tiết kiệm ~30% so với mua lẻ. "
+            "Tặng kèm ebook \"7 ngày bếp đẹp kiểu Hàn\" + video hướng dẫn setup. "
+            "Cả 3 đồng bộ tone trắng/gỗ nên bếp nhìn gọn hẳn.\n\n"
+            "Chị muốn đặt combo luôn không?"
         ),
-        quick_replies=["🛒 Đặt combo ngay", "🚚 Phí ship bao nhiêu", "📋 Xem bảng giá"],
+        quick_replies=["Đặt combo ngay", "Phí ship bao nhiêu", "Xem bảng giá"],
     ),
 
     # 7. KÍCH THƯỚC / SIZE
@@ -156,18 +144,13 @@ SCENARIOS: list[Scenario] = [
             "vừa tủ không", "vừa bếp không",
         ],
         response=(
-            "Dạ kích thước chi tiết ạ:\n\n"
-            "🧊 Khay tủ lạnh:\n"
-            "• S: 15×10×6 cm — ngăn nhỏ, để trứng/gia vị\n"
-            "• M: 25×15×8 cm — phổ biến, để rau/trái cây\n"
-            "• L: 32×20×10 cm — ngăn rau củ lớn\n\n"
-            "🔩 Kệ dán tường:\n"
-            "• 1 tầng: 40×12×10 cm\n"
-            "• 2 tầng: 40×12×25 cm\n\n"
-            "🌀 Hộp xoay: đường kính 25cm, cao 20cm\n\n"
-            "Chị cho em biết tủ lạnh/bếp chị rộng bao nhiêu, em tư vấn size phù hợp nhé!"
+            "Size chi tiết nè chị:\n\n"
+            "Khay tủ lạnh: S 15×10×6cm / M 25×15×8cm / L 32×20×10cm\n"
+            "Kệ dán: 1 tầng 40×12×10cm / 2 tầng 40×12×25cm\n"
+            "Hộp xoay: đường kính 25cm, cao 20cm\n\n"
+            "Chị cho em biết tủ lạnh/bếp rộng cỡ nào em tư vấn size phù hợp nha"
         ),
-        quick_replies=["💰 Xem giá", "🛒 Đặt hàng", "❓ Tư vấn thêm"],
+        quick_replies=["Xem giá", "Đặt hàng", "Tư vấn thêm"],
     ),
 
     # 8. CHẤT LIỆU / NGUỒN GỐC
@@ -178,19 +161,13 @@ SCENARIOS: list[Scenario] = [
             "có độc không", "bpa", "chat lieu",
         ],
         response=(
-            "Dạ chất liệu sản phẩm Chun Store ạ:\n\n"
-            "🧊 Khay tủ lạnh:\n"
-            "• Nhựa PP — an toàn thực phẩm, không BPA\n"
-            "• Chịu -20°C đến 120°C\n\n"
-            "🔩 Kệ dán tường:\n"
-            "• Inox 304 — không gỉ, chống nước\n"
-            "• Keo nano — chịu 5kg, gỡ sạch\n\n"
-            "🌀 Hộp gia vị:\n"
-            "• Nhựa ABS + PP — bền, chống va đập\n\n"
-            "Sản phẩm nhập Hàn Quốc, có kiểm định chất lượng 🇰🇷✅\n\n"
-            "Chị muốn xem gì thêm ạ?"
+            "Hàng bên em nhập Hàn Quốc nha chị, có kiểm định chất lượng.\n\n"
+            "Khay tủ lạnh bằng nhựa PP, không BPA, chịu được -20°C đến 120°C. "
+            "Kệ dán bằng inox 304 không gỉ + keo nano chịu 5kg. "
+            "Hộp gia vị bằng nhựa ABS + PP bền, chống va đập.\n\n"
+            "Chị yên tâm dùng nha, an toàn thực phẩm luôn"
         ),
-        quick_replies=["💰 Xem giá", "🛒 Đặt hàng", "🚚 Thông tin ship"],
+        quick_replies=["Xem giá", "Đặt hàng", "Thông tin ship"],
     ),
 
     # 9. HÌNH ẢNH / REVIEW
@@ -202,15 +179,13 @@ SCENARIOS: list[Scenario] = [
             "hình thật", "ảnh thật", "before after",
         ],
         response=(
-            "Dạ chị xem hình thực tế và review từ khách đã mua ạ! 📸\n\n"
-            "👉 Hình sản phẩm + before/after: chị xem trên page Chun Store nhé ạ\n\n"
-            "⭐ Feedback từ khách:\n"
-            "• \"Tủ lạnh gọn hẳn, mở ra thấy sướng mắt\" — Chị Linh, HN\n"
-            "• \"Nhà thuê mà bếp đẹp như phim Hàn\" — Chị Nga, SG\n"
-            "• \"Mua combo xong còn mua thêm tặng mẹ\" — Chị Trang, ĐN\n\n"
-            "Chị muốn đặt thử không ạ? Không ưng đổi trả trong 7 ngày luôn 😊"
+            "Hình thực tế + review chị qua page Chun Store xem nha, nhiều before/after lắm!\n\n"
+            "Mấy chị mua rồi feedback:\n"
+            "- \"Tủ lạnh gọn hẳn, mở ra sướng mắt\" — chị Linh ở HN\n"
+            "- \"Bếp nhà thuê mà trông xịn như phim Hàn\" — chị Nga ở SG\n\n"
+            "Đổi trả 7 ngày nếu không ưng nha chị, cứ thử thoải mái"
         ),
-        quick_replies=["🛒 Đặt hàng", "💰 Xem giá", "🔄 Chính sách đổi trả"],
+        quick_replies=["Đặt hàng", "Xem giá", "Chính sách đổi trả"],
     ),
 
     # ═══════════════════════════════════════════
@@ -226,18 +201,12 @@ SCENARIOS: list[Scenario] = [
             "bao lâu nhận", "bao gio nhan", "mấy ngày",
         ],
         response=(
-            "🚚 Thông tin giao hàng ạ:\n\n"
-            "• Ship COD toàn quốc (nhận hàng mới trả tiền)\n"
-            "• Phí ship: 25K – 35K tùy khu vực\n"
-            "• 🎉 FREE ship cho đơn từ 499K\n"
-            "• Thời gian giao:\n"
-            "  - HN/HCM: 1–2 ngày\n"
-            "  - Tỉnh gần: 2–3 ngày\n"
-            "  - Tỉnh xa: 3–5 ngày\n\n"
-            "👉 Mua combo 499K+ là freeship luôn ạ!\n\n"
-            "Chị ở khu vực nào ạ?"
+            "Ship COD toàn quốc nha chị — nhận hàng rồi mới trả tiền.\n\n"
+            "Phí ship 25K – 35K tùy khu vực. Đơn từ 499K em freeship luôn.\n"
+            "HN/HCM giao 1-2 ngày, tỉnh thì 2-5 ngày.\n\n"
+            "Chị ở đâu để em báo chính xác phí ship nha?"
         ),
-        quick_replies=["🛒 Đặt hàng", "🎁 Xem combo freeship", "💰 Xem bảng giá"],
+        quick_replies=["Đặt hàng", "Xem combo freeship", "Xem bảng giá"],
     ),
 
     # 11. ĐỔI TRẢ / BẢO HÀNH
@@ -248,18 +217,12 @@ SCENARIOS: list[Scenario] = [
             "doi tra", "bao hanh", "chinh sach",
         ],
         response=(
-            "Dạ chính sách Chun Store ạ:\n\n"
-            "🔄 Đổi trả trong 7 ngày nếu:\n"
-            "• Sản phẩm lỗi do nhà sản xuất\n"
-            "• Không đúng mô tả\n"
-            "• Giao nhầm hàng\n\n"
-            "📦 Quy trình:\n"
-            "• Quay video unbox lúc nhận hàng\n"
-            "• Có vấn đề → nhắn em kèm video\n"
-            "• Em đổi/hoàn trong 1-2 ngày\n\n"
-            "Cam kết hàng đúng hình, đúng chất lượng ạ 💪"
+            "Bên em đổi trả trong 7 ngày nha chị.\n\n"
+            "Nếu hàng lỗi, không đúng mô tả, hay giao nhầm — chị quay video lúc unbox rồi nhắn em. "
+            "Em đổi/hoàn trong 1-2 ngày luôn.\n\n"
+            "Cam kết hàng đúng hình, đúng chất lượng. Chị cứ yên tâm đặt nha"
         ),
-        quick_replies=["🛒 Đặt hàng", "💰 Xem giá", "❓ Hỏi thêm"],
+        quick_replies=["Đặt hàng", "Xem giá", "Hỏi thêm"],
     ),
 
     # 12. NHÀ THUÊ / KHÔNG KHOAN
@@ -270,15 +233,12 @@ SCENARIOS: list[Scenario] = [
             "khoan tường", "sợ hỏng tường",
         ],
         response=(
-            "Chị thuê nhà không cần lo khoan tường ạ! 🏠✅\n\n"
-            "Kệ dán Chun Store dùng keo nano:\n"
-            "• Dán chắc — chịu 5kg\n"
-            "• Gỡ sạch — KHÔNG để vết, không mất cọc\n"
-            "• Inox 304 — chống nước, dầu mỡ OK\n\n"
-            "Nhiều chị thuê nhà dùng xong còn tiếc không mua sớm hơn 😄\n\n"
-            "Chị muốn xem giá hay đặt luôn ạ?"
+            "Nhà thuê thì dùng kệ dán bên em hợp lắm chị!\n\n"
+            "Keo nano dán chắc chịu 5kg, mà gỡ ra sạch không để vết. "
+            "Trả phòng không sợ mất cọc. Inox 304 nên dầu mỡ, nước cũng không sao.\n\n"
+            "Nhiều chị thuê nhà dùng xong tiếc sao không mua sớm hơn luôn á"
         ),
-        quick_replies=["💰 Xem giá kệ dán", "🛒 Đặt hàng", "🎁 Xem combo"],
+        quick_replies=["Xem giá kệ dán", "Đặt hàng", "Xem combo"],
     ),
 
     # ═══════════════════════════════════════════
@@ -293,14 +253,12 @@ SCENARIOS: list[Scenario] = [
             "có giảm không", "có sale không", "có khuyến mãi không",
         ],
         response=(
-            "Dạ hiện tại Chun Store có ưu đãi ạ:\n\n"
-            "🎁 Combo 3 SP — tiết kiệm 30% so với mua lẻ\n"
-            "🚚 FREE ship cho đơn từ 499K\n"
-            "📚 Tặng kèm Ebook + Video hướng dẫn setup\n\n"
-            "👉 Combo là deal tốt nhất hiện tại ạ — vừa tiết kiệm vừa được freeship + quà tặng!\n\n"
-            "Chị muốn xem combo không ạ?"
+            "Hiện tại mua combo là deal tốt nhất luôn chị:\n\n"
+            "Combo 3 SP tiết kiệm 30% so với mua lẻ, freeship cho đơn từ 499K, "
+            "tặng thêm ebook + video hướng dẫn setup.\n\n"
+            "Chị muốn em gửi thông tin combo không?"
         ),
-        quick_replies=["🎁 Xem combo", "💰 Xem bảng giá", "🛒 Đặt hàng"],
+        quick_replies=["Xem combo", "Xem bảng giá", "Đặt hàng"],
     ),
 
     # 14. SO SÁNH / TỐT HƠN GÌ
@@ -311,27 +269,20 @@ SCENARIOS: list[Scenario] = [
             "mua ở đâu rẻ hơn", "bên khác", "hàng tàu",
         ],
         response=(
-            "Dạ chị hỏi rất hay! So sánh Chun Store với hàng chợ/Shopee ạ:\n\n"
-            "🏷️ Hàng chợ/Shopee:\n"
-            "• Rẻ hơn 20-30K nhưng nhựa mỏng, dễ vỡ\n"
-            "• Không rõ nguồn gốc, có thể chứa BPA\n"
-            "• Không bảo hành, không đổi trả\n\n"
-            "✅ Chun Store:\n"
-            "• Nhập Hàn Quốc, kiểm định chất lượng\n"
-            "• Nhựa PP an toàn, không BPA\n"
-            "• Đổi trả 7 ngày + CSKH 7 ngày sau mua\n"
-            "• Mua combo tiết kiệm 30% + quà tặng\n\n"
-            "Chênh vài chục K nhưng dùng an tâm hơn nhiều ạ 😊"
+            "Thật ra Shopee/chợ có hàng rẻ hơn 20-30K thật, nhưng nhựa mỏng dễ vỡ, "
+            "không rõ nguồn gốc, mà không đổi trả được.\n\n"
+            "Bên em hàng nhập Hàn Quốc, nhựa PP an toàn thực phẩm. "
+            "Được đổi trả 7 ngày, em còn chăm sóc 7 ngày sau mua nữa. "
+            "Chênh vài chục K thôi mà dùng an tâm hơn nhiều chị ạ"
         ),
-        quick_replies=["🎁 Xem combo", "🛒 Đặt hàng", "📋 Xem bảng giá"],
+        quick_replies=["Xem combo", "Đặt hàng", "Xem bảng giá"],
     ),
 
     # ═══════════════════════════════════════════
     # NHÓM 5: XỬ LÝ TỪ CHỐI (Chris Voss — Straight Line)
-    # Nguồn: 2 Sơ Đồ Vận Hành/Phòng Ban/Chris Voss (Chốt Đơn & CSKH).md
     # ═══════════════════════════════════════════
 
-    # 15. "ĐẮT QUÁ" → So sánh giá trị dài hạn
+    # 15. "ĐẮT QUÁ"
     Scenario(
         keywords=[
             "đắt quá", "mắc quá", "đắt", "mắc", "giá cao", "chát",
@@ -339,18 +290,15 @@ SCENARIOS: list[Scenario] = [
             "dat qua", "mac qua", "nhieu tien qua",
         ],
         response=(
-            "Dạ em hiểu chị lo về giá ạ! 😊\n\n"
-            "Nhưng chị tính thử nha:\n"
-            "• Mua hàng chợ 50-70K → dùng 2-3 tháng hỏng → mua lại\n"
-            "• Chun Store 89-149K → dùng 2-3 năm, an toàn thực phẩm\n\n"
-            "Tính ra Chun Store rẻ hơn nhiều ạ 💰\n\n"
-            "Với lại combo 3 SP chỉ 419K — tiết kiệm 30% + freeship + quà tặng.\n"
-            "Chị xem combo thử không ạ?"
+            "Em hiểu chị, nhìn giá thấy ngại thiệt.\n\n"
+            "Nhưng chị tính coi — hàng chợ 50-70K dùng 2-3 tháng hỏng, phải mua lại. "
+            "Bên em 89-149K dùng 2-3 năm, an toàn thực phẩm. Tính ra rẻ hơn nhiều.\n\n"
+            "Mà nếu chị lấy combo 3 SP chỉ 419K, tiết kiệm 30% + freeship luôn á"
         ),
-        quick_replies=["🎁 Xem combo tiết kiệm", "💰 Xem bảng giá", "📸 Xem review KH"],
+        quick_replies=["Xem combo tiết kiệm", "Xem bảng giá", "Xem review KH"],
     ),
 
-    # 16. "ĐỂ SUY NGHĨ" → Hỏi calibrated question
+    # 16. "ĐỂ SUY NGHĨ"
     Scenario(
         keywords=[
             "suy nghĩ", "để suy nghĩ", "tính đã", "xem đã", "coi đã",
@@ -358,55 +306,47 @@ SCENARIOS: list[Scenario] = [
             "suy nghi", "chua quyet",
         ],
         response=(
-            "Dạ vâng ạ, chị cứ suy nghĩ nhé! 😊\n\n"
-            "Em hỏi nhỏ: Điều gì khiến chị còn phân vân ạ?\n"
-            "• Giá cả?\n"
-            "• Chất lượng?\n"
-            "• Hay chưa biết chọn sản phẩm nào?\n\n"
-            "Chị chia sẻ để em tư vấn đúng hơn ạ 🥰"
+            "Dạ chị cứ từ từ nha, không vội!\n\n"
+            "Mà em hỏi thiệt — chị đang phân vân chỗ nào? "
+            "Giá cả, chất lượng, hay chưa biết chọn gì? "
+            "Nói em biết em tư vấn đúng hơn cho chị"
         ),
-        quick_replies=["💰 Lo về giá", "❓ Lo về chất lượng", "🎁 Chưa biết chọn gì"],
+        quick_replies=["Lo về giá", "Lo về chất lượng", "Chưa biết chọn gì"],
     ),
 
-    # 17. "SHOPEE RẺ HƠN" → Stack value
+    # 17. "SHOPEE RẺ HƠN"
     Scenario(
         keywords=[
             "shopee rẻ hơn", "lazada rẻ hơn", "mua shopee", "trên shopee",
             "bên kia rẻ hơn", "chỗ khác rẻ hơn", "rẻ hơn",
         ],
         response=(
-            "Dạ chị ơi, em hiểu ạ! Shopee có hàng rẻ hơn thật 😊\n\n"
-            "Nhưng mua Chun Store chị được thêm:\n"
-            "✅ Hàng Hàn Quốc chính hãng — không lo BPA\n"
-            "✅ Đổi trả 7 ngày — không ưng hoàn tiền\n"
-            "✅ CSKH 7 ngày sau mua — em hỏi thăm chị\n"
-            "✅ Video hướng dẫn setup bếp đẹp\n"
-            "✅ Ebook \"7 ngày bếp đẹp kiểu Hàn\"\n\n"
-            "Chênh vài chục K nhưng an tâm hơn nhiều ạ.\n"
-            "Chị muốn xem combo tiết kiệm không?"
+            "Ừa Shopee có hàng rẻ hơn thật chị. Em không phủ nhận.\n\n"
+            "Nhưng mua bên em chị được thêm: hàng Hàn Quốc chính hãng không lo BPA, "
+            "đổi trả 7 ngày không ưng hoàn tiền, em chăm sóc 7 ngày sau mua, "
+            "tặng video setup + ebook bếp đẹp.\n\n"
+            "Chênh vài chục K thôi mà an tâm hơn nhiều. Chị muốn xem combo không?"
         ),
-        quick_replies=["🎁 Xem combo", "📸 Xem review KH", "🛒 Đặt hàng"],
+        quick_replies=["Xem combo", "Xem review KH", "Đặt hàng"],
     ),
 
-    # 18. "HỎI CHỒNG" → Gửi bảng so sánh
+    # 18. "HỎI CHỒNG"
     Scenario(
         keywords=[
             "hỏi chồng", "hỏi vợ", "hỏi ông xã", "bàn với chồng",
             "bàn với vợ", "để hỏi", "hỏi gia đình",
         ],
         response=(
-            "Dạ chị cứ bàn với anh nhà nhé! 😊\n\n"
-            "Em gửi chị tóm tắt để chồng xem nhanh:\n\n"
-            "🏠 Chun Store — Đồ gia dụng Hàn Quốc\n"
-            "💰 Combo 3 SP: 419K (tiết kiệm 30%)\n"
-            "🚚 Freeship + COD (nhận hàng mới trả)\n"
-            "🔄 Đổi trả 7 ngày nếu không ưng\n\n"
-            "Khi nào anh chị quyết, nhắn em đặt ngay ạ! 🥰"
+            "Dạ chị cứ bàn với anh nhà!\n\n"
+            "Em gửi tóm tắt cho chồng xem nhanh nha: "
+            "Combo 3 SP đồ gia dụng Hàn Quốc giá 419K, freeship, COD nhận hàng mới trả tiền, "
+            "đổi trả 7 ngày không ưng hoàn lại.\n\n"
+            "Khi nào anh chị quyết rồi nhắn em, em lên đơn liền nha"
         ),
-        quick_replies=["🛒 Đặt hàng", "📋 Xem bảng giá", "🎁 Xem combo"],
+        quick_replies=["Đặt hàng", "Xem bảng giá", "Xem combo"],
     ),
 
-    # 19. "HẾT TIỀN" → Downsale
+    # 19. "HẾT TIỀN"
     Scenario(
         keywords=[
             "hết tiền", "không có tiền", "chưa có tiền", "tiền không đủ",
@@ -414,17 +354,15 @@ SCENARIOS: list[Scenario] = [
             "het tien", "khong co tien",
         ],
         response=(
-            "Dạ em hiểu chị ạ! 😊\n\n"
-            "Chị không cần mua combo ngay — mua lẻ 1 sản phẩm trước cũng được:\n\n"
-            "🧊 Khay tủ lạnh chỉ từ 89K\n"
-            "🔩 Kệ dán tường từ 129K\n\n"
-            "Dùng thấy ưng rồi mua thêm sau cũng không muộn ạ!\n"
-            "Với lại ship COD — nhận hàng mới trả tiền, không cần chuyển khoản trước 😊"
+            "Dạ em hiểu chị! Không cần mua combo ngay đâu.\n\n"
+            "Chị mua lẻ 1 cái trước cũng được — khay tủ lạnh chỉ 89K thôi, "
+            "mà tủ lạnh gọn hẳn luôn. Dùng thấy ok rồi mua thêm sau cũng được.\n\n"
+            "Ship COD nên chị nhận hàng rồi mới trả tiền, không cần CK trước nha"
         ),
-        quick_replies=["🧊 Xem khay 89K", "🔩 Xem kệ 129K", "💰 Xem bảng giá"],
+        quick_replies=["Xem khay 89K", "Xem kệ 129K", "Xem bảng giá"],
     ),
 
-    # 20. "CHƯA CẦN" → Nurture
+    # 20. "CHƯA CẦN"
     Scenario(
         keywords=[
             "chưa cần", "không cần", "chưa muốn mua", "không muốn",
@@ -432,35 +370,31 @@ SCENARIOS: list[Scenario] = [
             "chua can", "khong can",
         ],
         response=(
-            "Dạ vâng ạ, không sao chị! 😊\n\n"
-            "Em giữ liên lạc nhé — khi nào chị cần em hỗ trợ ngay ạ.\n\n"
-            "💡 Tip nhỏ: Nhiều chị bắt đầu bằng 1 khay tủ lạnh 89K thôi, "
-            "dùng thấy sướng rồi mua thêm dần. "
-            "Không cần setup cả bếp 1 lúc đâu ạ 😄\n\n"
-            "Chúc chị ngày vui vẻ! 🌸"
+            "Ok chị, không sao!\n\n"
+            "Khi nào cần chị cứ nhắn em nha. "
+            "Nhiều chị bắt đầu bằng 1 khay tủ lạnh 89K thôi, dùng thấy thích rồi mua thêm dần. "
+            "Không cần mua hết 1 lúc đâu ạ.\n\n"
+            "Chúc chị ngày vui!"
         ),
-        quick_replies=["📋 Xem bảng giá", "🎁 Xem combo", "📸 Xem hình thực tế"],
+        quick_replies=["Xem bảng giá", "Xem combo", "Xem hình thực tế"],
     ),
 
-    # 21. "ĐÃ CÓ RỒI" → So sánh
+    # 21. "ĐÃ CÓ RỒI"
     Scenario(
         keywords=[
             "có rồi", "mua rồi", "đã có", "dùng rồi", "xài rồi",
             "có hết rồi", "co roi", "da co",
         ],
         response=(
-            "Ồ chị đã có rồi ạ! Chị dùng hãng nào vậy? 🤔\n\n"
-            "Nếu chị thấy:\n"
-            "• Nhựa bắt đầu ố vàng → nhựa PP Hàn bền hơn\n"
-            "• Kệ dán bong → keo nano Chun Store chịu 5kg\n"
-            "• Muốn nâng cấp bếp đẹp hơn → combo đồng bộ tone trắng/gỗ\n\n"
-            "Hoặc chị mua tặng bạn bè/người thân cũng hay ạ — "
-            "nhiều chị mua xong còn mua thêm tặng mẹ 🥰"
+            "Ồ chị có rồi á? Dùng hãng nào vậy chị?\n\n"
+            "Nếu thấy nhựa bắt đầu ố vàng hay kệ dán bong thì nên đổi qua nhựa PP Hàn bền hơn nè. "
+            "Hoặc chị mua tặng bạn bè người thân cũng hay — "
+            "nhiều chị mua xong còn mua thêm tặng mẹ nữa á"
         ),
-        quick_replies=["🎁 Xem combo tặng", "💰 Xem giá", "📸 Xem hình"],
+        quick_replies=["Xem combo tặng", "Xem giá", "Xem hình"],
     ),
 
-    # 22. "KHÔNG TIN" → Social proof
+    # 22. "KHÔNG TIN"
     Scenario(
         keywords=[
             "không tin", "lừa đảo", "scam", "giả", "sợ lừa",
@@ -468,18 +402,13 @@ SCENARIOS: list[Scenario] = [
             "co that khong", "lua dao",
         ],
         response=(
-            "Dạ em hiểu chị lo ạ — mua online phải cẩn thận! 😊\n\n"
-            "Chun Store cam kết:\n"
-            "✅ Ship COD — nhận hàng mới trả tiền, không rủi ro\n"
-            "✅ Đổi trả 7 ngày — không ưng hoàn tiền\n"
-            "✅ Quay video unbox khi nhận — có vấn đề em đổi ngay\n"
-            "✅ Hàng Hàn Quốc nhập khẩu chính hãng\n\n"
-            "⭐ Feedback từ khách:\n"
-            "• \"Hàng y hình, đóng gói cẩn thận\" — Chị Linh, HN\n"
-            "• \"Mua lần 2 tặng mẹ luôn\" — Chị Trang, ĐN\n\n"
-            "Chị cứ đặt thử — nhận hàng không ưng em hoàn tiền ạ!"
+            "Chị lo mua online bị lừa em hiểu chị.\n\n"
+            "Bên em ship COD — chị nhận hàng kiểm tra rồi mới trả tiền, không rủi ro gì hết. "
+            "Đổi trả 7 ngày, chị quay video lúc mở hàng, có vấn đề em đổi ngay.\n\n"
+            "Feedback khách: \"Hàng y hình, đóng gói cẩn thận\" — chị Linh ở HN. "
+            "Chị cứ thử đặt 1 cái, không ưng em hoàn tiền nha"
         ),
-        quick_replies=["🛒 Đặt hàng COD", "📸 Xem thêm review", "💰 Xem giá"],
+        quick_replies=["Đặt hàng COD", "Xem thêm review", "Xem giá"],
     ),
 
     # ═══════════════════════════════════════════
@@ -494,16 +423,15 @@ SCENARIOS: list[Scenario] = [
             "sđt", "điện thoại",
         ],
         response=(
-            "Dạ chị liên hệ Chun Store qua:\n\n"
-            "📱 Nhắn tin: m.me/ChunStore (nhanh nhất)\n"
-            "📞 Zalo: 0xxx.xxx.xxx\n"
-            "⏰ Thời gian hỗ trợ: 8h – 21h hàng ngày\n\n"
-            "Hoặc chị cứ nhắn tại đây, em hỗ trợ ngay ạ! 😊"
+            "Chị liên hệ em qua:\n"
+            "- Nhắn tin ngay đây (nhanh nhất)\n"
+            "- Zalo: 0xxx.xxx.xxx\n\n"
+            "Em hỗ trợ 8h – 21h hàng ngày nha chị"
         ),
-        quick_replies=["💰 Xem giá", "🛒 Đặt hàng", "❓ Hỏi thêm"],
+        quick_replies=["Xem giá", "Đặt hàng", "Hỏi thêm"],
     ),
 
-    # 16. BẾP NHỎ / BẾP BỪA
+    # 24. BẾP NHỎ / BẾP BỪA
     Scenario(
         keywords=[
             "bếp nhỏ", "bếp chật", "bếp bừa", "bừa bộn", "ngán",
@@ -511,92 +439,88 @@ SCENARIOS: list[Scenario] = [
             "bep nho", "bep bua", "tu lanh bua",
         ],
         response=(
-            "Em hiểu chị luôn ạ — bếp nhỏ mà đồ cứ ngập lên! 😅\n\n"
-            "Giải pháp Chun Store cho bếp 4-6m²:\n\n"
-            "🧊 Khay tủ lạnh: Phân chia ngăn gọn, nhìn vào biết có gì\n"
-            "🔩 Kệ dán tường: Tận dụng tường trống, không chiếm mặt bàn\n"
-            "🌀 Hộp xoay: 8-12 ngăn trên 1 chỗ nhỏ xíu\n\n"
-            "Nhiều chị setup xong bếp 4m² mà trông rộng gấp đôi ạ 🏠✨\n\n"
+            "Bếp nhỏ mà đồ cứ ngập lên em hiểu chị lắm!\n\n"
+            "Khay tủ lạnh phân chia ngăn gọn, nhìn vào biết có gì. "
+            "Kệ dán tường tận dụng chỗ trống, không chiếm mặt bàn. "
+            "Hộp xoay để 8-12 ngăn trên 1 chỗ nhỏ xíu.\n\n"
+            "Nhiều chị setup xong bếp 4m² mà trông rộng gấp đôi luôn. "
             "Chị muốn em tư vấn bắt đầu từ đâu không?"
         ),
-        quick_replies=["🎁 Xem combo", "💰 Xem giá", "📸 Xem hình before/after"],
+        quick_replies=["Xem combo", "Xem giá", "Xem hình before/after"],
     ),
 
     # ═══════════════════════════════════════════
-    # NHÓM 6: CHÀO HỎI & KẾT THÚC (ưu tiên thấp)
+    # NHÓM 7: CHÀO HỎI & KẾT THÚC (ưu tiên thấp)
     # ═══════════════════════════════════════════
 
-    # 17. CHÀO HỎI
+    # 25. CHÀO HỎI
     Scenario(
         keywords=[
             "chào", "hello", "hi", "alo", "halo", "ơi", "cho hỏi",
             "tư vấn", "xin chào", "chao", "hey",
         ],
         response=(
-            "Chào chị! 🏠 Em là Chun — tư vấn viên của Chun Store.\n\n"
-            "Chun Store chuyên đồ gia dụng Hàn Quốc giúp bếp gọn đẹp ✨\n\n"
-            "Chị đang cần tìm hiểu gì ạ?"
+            "Chào chị! Em là Chun bên Chun Store nè.\n\n"
+            "Bên em chuyên đồ gia dụng Hàn Quốc giúp bếp gọn đẹp. "
+            "Chị đang tìm hiểu gì để em tư vấn nha?"
         ),
-        quick_replies=["📋 Xem bảng giá", "🛍️ Xem combo", "❓ Tư vấn thêm", "🚚 Thông tin ship"],
+        quick_replies=["Xem bảng giá", "Xem combo", "Tư vấn thêm", "Thông tin ship"],
     ),
 
-    # 18. CẢM ƠN
+    # 26. CẢM ƠN
     Scenario(
         keywords=[
             "cảm ơn", "cám ơn", "thanks", "tks", "thank", "cam on",
             "cảm ơn nha", "cảm ơn nhé", "ok cảm ơn", "oke cảm ơn",
         ],
         response=(
-            "Dạ không có gì ạ! Em cảm ơn chị đã quan tâm Chun Store 🥰\n\n"
-            "Chị cần gì cứ nhắn em bất cứ lúc nào nhé!\n"
-            "Chúc chị có căn bếp đẹp như ý 🏠✨"
+            "Dạ không có gì chị! Cảm ơn chị đã quan tâm Chun Store nha.\n\n"
+            "Khi nào cần gì cứ nhắn em. Chúc chị có căn bếp thật đẹp!"
         ),
-        quick_replies=["🛒 Đặt hàng", "📋 Xem bảng giá", "🎁 Xem combo"],
+        quick_replies=["Đặt hàng", "Xem bảng giá", "Xem combo"],
     ),
 
-    # 19. TẠM BIỆT
+    # 27. TẠM BIỆT
     Scenario(
         keywords=[
             "tạm biệt", "bye", "bb", "bai", "tạm", "goodbye",
-            "để sau", "mai tính", "để em suy nghĩ", "suy nghĩ đã",
-            "để tính", "xem đã", "coi đã",
+            "để sau", "mai tính",
         ],
         response=(
-            "Dạ vâng ạ! Chị cứ từ từ suy nghĩ nhé 😊\n\n"
-            "Khi nào cần, chị nhắn lại đây em hỗ trợ ngay ạ!\n"
-            "Chúc chị một ngày vui vẻ 🌸"
+            "Dạ chị! Khi nào cần cứ nhắn em nha.\n"
+            "Chúc chị ngày vui vẻ!"
         ),
-        quick_replies=["📋 Xem bảng giá", "🎁 Xem combo"],
+        quick_replies=["Xem bảng giá", "Xem combo"],
     ),
 
-    # 20. OK / ĐỒNG Ý (nhẹ nhàng chốt)
+    # 28. OK / ĐỒNG Ý
     Scenario(
         keywords=[
             "ok", "oke", "oki", "okie", "được", "dc", "ờ", "ừ",
             "vâng", "dạ", "đồng ý", "đúng rồi",
         ],
         response=(
-            "Dạ chị muốn em hỗ trợ thêm gì ạ? 😊\n\n"
-            "Em có thể giúp chị xem giá, tư vấn sản phẩm, hoặc đặt hàng luôn ạ!"
+            "Chị muốn em hỗ trợ thêm gì không? "
+            "Em có thể tư vấn sản phẩm, báo giá, hoặc lên đơn cho chị luôn nha"
         ),
-        quick_replies=["📋 Xem bảng giá", "🛒 Đặt hàng", "🎁 Xem combo", "❓ Tư vấn thêm"],
+        quick_replies=["Xem bảng giá", "Đặt hàng", "Xem combo", "Tư vấn thêm"],
     ),
 
-    # 21. KHÔNG HIỂU / HỎI LẠI
+    # 29. KHÔNG HIỂU / HỎI LẠI
     Scenario(
         keywords=[
             "không hiểu", "gì", "hả", "sao", "nói lại",
             "em ơi", "nói rõ hơn",
         ],
         response=(
-            "Dạ em xin lỗi chị — để em giải thích rõ hơn ạ! 😊\n\n"
+            "Sorry chị, để em nói rõ hơn nha!\n\n"
             "Chun Store bán 3 sản phẩm gia dụng Hàn Quốc:\n"
-            "🧊 Khay tủ lạnh — giữ tủ lạnh gọn gàng\n"
-            "🔩 Kệ dán tường — không cần khoan, phù hợp nhà thuê\n"
-            "🌀 Hộp xoay gia vị — tiết kiệm diện tích bếp\n\n"
-            "Chị muốn tìm hiểu sản phẩm nào ạ?"
+            "- Khay tủ lạnh — giữ tủ lạnh gọn gàng\n"
+            "- Kệ dán tường — không cần khoan, nhà thuê dùng ok\n"
+            "- Hộp xoay gia vị — tiết kiệm diện tích bếp\n\n"
+            "Chị muốn tìm hiểu cái nào?"
         ),
-        quick_replies=["📋 Xem bảng giá", "🎁 Xem combo", "🚚 Thông tin ship", "❓ Tư vấn thêm"],
+        quick_replies=["Xem bảng giá", "Xem combo", "Thông tin ship", "Tư vấn thêm"],
     ),
 ]
 
