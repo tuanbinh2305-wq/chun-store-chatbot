@@ -412,10 +412,350 @@ SCENARIOS: list[Scenario] = [
     ),
 
     # ═══════════════════════════════════════════
-    # NHÓM 6: LIÊN HỆ & HỖ TRỢ
+    # NHÓM 6: SẢN PHẨM CHI TIẾT & SỬ DỤNG
     # ═══════════════════════════════════════════
 
-    # 23. SĐT / HOTLINE
+    # 23. CÒN HÀNG KHÔNG / HẾT HÀNG
+    Scenario(
+        keywords=[
+            "còn hàng", "hết hàng", "còn không", "có hàng không", "có sẵn",
+            "con hang", "het hang", "con ko", "con k", "stocking",
+            "bao giờ có hàng", "khi nào có", "hàng về chưa",
+        ],
+        response=(
+            "Hàng bên em có sẵn luôn chị, đặt là ship liền.\n\n"
+            "Chị muốn lấy gì em lên đơn nha?"
+        ),
+        quick_replies=["Xem bảng giá", "Đặt hàng", "Xem combo"],
+    ),
+
+    # 24. MÀU SẮC
+    Scenario(
+        keywords=[
+            "màu", "màu gì", "có màu", "màu trắng", "màu gỗ",
+            "mau gi", "co mau", "color", "tone",
+        ],
+        response=(
+            "Bên em có tone trắng và tone gỗ nha chị. "
+            "Cả 2 đều minimalist kiểu Hàn, phối với bếp nào cũng hợp.\n\n"
+            "Mua combo thì 3 cái đồng bộ 1 tone luôn, bếp nhìn gọn hẳn. "
+            "Chị thích tone nào?"
+        ),
+        quick_replies=["Xem combo", "Xem hình thực tế", "Đặt hàng"],
+    ),
+
+    # 25. CÁCH SỬ DỤNG / LẮP ĐẶT
+    Scenario(
+        keywords=[
+            "cách dùng", "sử dụng", "lắp đặt", "lắp", "setup",
+            "cách lắp", "hướng dẫn", "dùng sao", "dùng thế nào",
+            "cach dung", "lap dat", "huong dan", "dung nhu the nao",
+            "cách sử dụng", "khó lắp không", "dễ dùng không",
+        ],
+        response=(
+            "Dễ lắm chị, không cần thợ đâu!\n\n"
+            "Khay tủ lạnh bỏ vào tủ là xong. "
+            "Kệ dán tường lau sạch tường → dán lên → chờ 24h rồi treo đồ. "
+            "Hộp xoay đặt lên bàn bếp xoay 360 độ luôn.\n\n"
+            "Mua combo em tặng kèm video hướng dẫn setup chi tiết nha"
+        ),
+        quick_replies=["Xem combo", "Đặt hàng", "Xem giá"],
+    ),
+
+    # 26. VỆ SINH / RỬA
+    Scenario(
+        keywords=[
+            "rửa", "vệ sinh", "lau", "dọn", "bẩn", "ố",
+            "rua", "ve sinh", "co kho rua", "dễ rửa",
+            "rửa bằng gì", "có dễ vệ sinh", "lau chùi",
+        ],
+        response=(
+            "Rửa bình thường bằng nước rửa chén là sạch nha chị.\n\n"
+            "Khay nhựa PP trơn nhẵn không bám dầu mỡ. "
+            "Kệ inox thì lau khăn ướt là sáng bóng lại. "
+            "Chị không cần lo vệ sinh đâu, dễ lắm"
+        ),
+        quick_replies=["Đặt hàng", "Xem giá", "Xem hình"],
+    ),
+
+    # 27. BỀN KHÔNG / DÙNG BAO LÂU
+    Scenario(
+        keywords=[
+            "bền không", "dùng được bao lâu", "tuổi thọ", "lâu không",
+            "mấy năm", "bao lâu hỏng", "có bền", "ben khong",
+            "dung duoc bao lau", "xài bao lâu", "bao lau hong",
+        ],
+        response=(
+            "Dùng 2-3 năm bình thường chị, giữ kỹ thì lâu hơn.\n\n"
+            "Nhựa PP Hàn dày hơn hàng chợ nên không dễ nứt vỡ. "
+            "Kệ inox 304 thì không gỉ, dùng mấy năm vẫn sáng. "
+            "So với hàng chợ 2-3 tháng hỏng thì khác biệt lớn lắm"
+        ),
+        quick_replies=["Đặt hàng", "Xem giá", "Xem combo"],
+    ),
+
+    # 28. THANH TOÁN
+    Scenario(
+        keywords=[
+            "thanh toán", "trả tiền", "chuyển khoản", "ck", "momo",
+            "banking", "chuyển tiền", "trả trước", "thanh toan",
+            "chuyen khoan", "tra tien", "payment",
+        ],
+        response=(
+            "Bên em ship COD nha chị — nhận hàng kiểm tra rồi mới trả tiền, "
+            "không cần chuyển khoản trước.\n\n"
+            "An toàn, không rủi ro gì hết. Chị muốn đặt luôn không?"
+        ),
+        quick_replies=["Đặt hàng", "Xem giá", "Xem combo"],
+    ),
+
+    # 29. MUA SỈ / SỐ LƯỢNG NHIỀU
+    Scenario(
+        keywords=[
+            "mua sỉ", "sỉ", "số lượng lớn", "nhiều cái", "mua nhiều",
+            "bán sỉ", "giá sỉ", "wholesale", "mua si", "ban si",
+            "10 cái", "20 cái", "50 cái", "100 cái",
+        ],
+        response=(
+            "Chị muốn lấy số lượng nhiều á? Được chị!\n\n"
+            "Chị cho em biết cần SP gì, bao nhiêu cái, em báo giá sỉ riêng cho chị nha. "
+            "Lấy nhiều em có giá tốt hơn"
+        ),
+        quick_replies=["Xem bảng giá lẻ", "Đặt hàng"],
+    ),
+
+    # 30. TRACKING ĐƠN / ĐƠN HÀNG ĐÂU
+    Scenario(
+        keywords=[
+            "đơn hàng", "tracking", "đơn đâu", "hàng đâu", "đơn của tôi",
+            "kiểm tra đơn", "theo dõi đơn", "don hang", "hang dau",
+            "bao giờ giao", "giao chưa", "ship chưa", "đã giao chưa",
+            "em ơi đơn", "mã đơn", "mã vận đơn",
+        ],
+        response=(
+            "Chị cho em SĐT hoặc tên người nhận đơn để em tra nha!\n\n"
+            "Thường HN/HCM 1-2 ngày, tỉnh 2-5 ngày. "
+            "Em kiểm tra xong báo chị liền"
+        ),
+        quick_replies=["Hỏi thêm"],
+    ),
+
+    # 31. HỦY ĐƠN / ĐỔI ĐƠN
+    Scenario(
+        keywords=[
+            "hủy đơn", "hủy", "cancel", "đổi đơn", "sửa đơn",
+            "đổi địa chỉ", "đổi sdt", "đổi size", "đổi sản phẩm",
+            "huy don", "doi don", "sua don",
+        ],
+        response=(
+            "Chị muốn hủy/sửa đơn hả? Được chị!\n\n"
+            "Chị cho em biết tên + SĐT đặt đơn, và muốn sửa gì, em xử lý nha. "
+            "Nếu hàng chưa giao thì sửa được liền"
+        ),
+        quick_replies=["Hỏi thêm"],
+    ),
+
+    # 32. MUA TẶNG
+    Scenario(
+        keywords=[
+            "tặng", "quà tặng", "mua tặng", "tặng bạn", "tặng mẹ",
+            "tặng chị", "tặng vợ", "quà", "gift", "mua tang",
+            "tặng sinh nhật", "tặng tân gia", "quà tân gia",
+        ],
+        response=(
+            "Mua tặng thì combo là hợp nhất luôn chị!\n\n"
+            "Combo 3 SP đồng bộ tone trắng/gỗ, đóng hộp đẹp. "
+            "Tặng tân gia, sinh nhật, hay cho mẹ đều ý nghĩa. "
+            "Nhiều chị mua xong còn quay lại mua thêm tặng người quen nữa.\n\n"
+            "Chị muốn ship đến địa chỉ người nhận luôn không?"
+        ),
+        quick_replies=["Đặt combo tặng", "Xem giá", "Xem hình"],
+    ),
+
+    # 33. CÓ SHOP OFFLINE KHÔNG
+    Scenario(
+        keywords=[
+            "shop ở đâu", "cửa hàng", "showroom", "mua trực tiếp",
+            "shop o dau", "cua hang", "địa chỉ shop", "ghé shop",
+            "có shop không", "mua tại chỗ",
+        ],
+        response=(
+            "Bên em bán online thôi chị, chưa có shop offline.\n\n"
+            "Nhưng chị yên tâm — ship COD nhận hàng mới trả tiền, "
+            "đổi trả 7 ngày nếu không ưng. Không rủi ro gì hết nha"
+        ),
+        quick_replies=["Đặt hàng", "Xem giá", "Xem review"],
+    ),
+
+    # 34. EBOOK / VIDEO TẶNG
+    Scenario(
+        keywords=[
+            "ebook", "video", "hướng dẫn setup", "sách", "tài liệu",
+            "7 ngày bếp đẹp", "bếp đẹp kiểu hàn",
+        ],
+        response=(
+            "Mua combo em tặng kèm 2 thứ:\n"
+            "- Ebook \"7 ngày bếp đẹp kiểu Hàn\" — hướng dẫn setup từng ngày\n"
+            "- Video hướng dẫn lắp đặt + sắp xếp chi tiết\n\n"
+            "Nhiều chị làm theo xong bếp thay đổi hẳn luôn á. "
+            "Chị muốn xem combo không?"
+        ),
+        quick_replies=["Xem combo", "Đặt hàng", "Xem giá"],
+    ),
+
+    # 35. NẶNG BAO NHIÊU / CÂN NẶNG
+    Scenario(
+        keywords=[
+            "nặng", "cân nặng", "bao nặng", "kg", "gram",
+            "nang bao nhieu", "nặng không",
+        ],
+        response=(
+            "Nhẹ lắm chị, khay tủ lạnh khoảng 200-400g tùy size. "
+            "Kệ dán tường 500g-1kg. Hộp xoay khoảng 800g.\n\n"
+            "Combo gộp lại cũng chỉ ~2kg thôi. Chị cần biết thêm gì không?"
+        ),
+        quick_replies=["Đặt hàng", "Xem giá", "Xem size"],
+    ),
+
+    # 36. GIAO CUỐI TUẦN / GIAO GIỜ NÀO
+    Scenario(
+        keywords=[
+            "giao cuối tuần", "giao thứ 7", "giao chủ nhật",
+            "giao giờ nào", "giao buổi tối", "giao sáng",
+            "giao t7", "giao cn", "ngày nghỉ",
+        ],
+        response=(
+            "Bên vận chuyển giao T2-T7 nha chị, CN nghỉ. "
+            "Giờ giao thường 8h-18h, shipper sẽ gọi trước khi giao.\n\n"
+            "Chị muốn đặt em lên đơn nha?"
+        ),
+        quick_replies=["Đặt hàng", "Xem giá"],
+    ),
+
+    # 37. ĐÓNG GÓI
+    Scenario(
+        keywords=[
+            "đóng gói", "gói", "bọc", "bubble", "hộp",
+            "dong goi", "đóng hộp", "có đóng gói kỹ không",
+            "giao có bể không", "vỡ không",
+        ],
+        response=(
+            "Em đóng gói cẩn thận nha chị — bọc bubble wrap + hộp carton, "
+            "không lo bể vỡ khi vận chuyển.\n\n"
+            "Lỡ nhận hàng có vấn đề chị quay video rồi nhắn em, em đổi ngay"
+        ),
+        quick_replies=["Đặt hàng", "Xem giá", "Chính sách đổi trả"],
+    ),
+
+    # 38. KHIẾU NẠI / KHÔNG HÀI LÒNG
+    Scenario(
+        keywords=[
+            "khiếu nại", "complain", "không hài lòng", "tệ", "dở",
+            "thất vọng", "kém", "thua", "khong hai long",
+            "chất lượng kém", "không như hình", "khác hình",
+        ],
+        response=(
+            "Ôi chị ơi, em xin lỗi nếu có gì không ưng ạ!\n\n"
+            "Chị gửi em hình/video sản phẩm + mô tả vấn đề, "
+            "em xử lý đổi/hoàn cho chị trong 1-2 ngày nha. "
+            "Cam kết chị hài lòng mới thôi"
+        ),
+        quick_replies=["Chính sách đổi trả", "Liên hệ hotline"],
+    ),
+
+    # 39. GỬI ĐỊA CHỈ / THÔNG TIN ĐẶT HÀNG
+    Scenario(
+        keywords=[
+            "địa chỉ của em", "địa chỉ mình", "gửi địa chỉ",
+            "mình ở", "em ở", "chị ở", "nhà mình ở",
+            "quận", "huyện", "phường", "tỉnh", "thành phố",
+        ],
+        response=(
+            "Ok chị, em nhận địa chỉ rồi!\n\n"
+            "Chị cho em thêm tên + SĐT người nhận, "
+            "và chị muốn lấy SP gì để em lên đơn nha"
+        ),
+        quick_replies=["Xem bảng giá", "Xem combo", "Đặt hàng"],
+    ),
+
+    # 40. HỎI VỀ GROUP / CỘNG ĐỒNG
+    Scenario(
+        keywords=[
+            "group", "nhóm", "cộng đồng", "community", "facebook group",
+            "bếp hàn việt", "tham gia", "vào nhóm",
+        ],
+        response=(
+            "Bên em có group \"Bếp Hàn Việt\" trên Facebook nha chị! "
+            "Mọi người chia sẻ before/after, tips sắp xếp bếp, review sản phẩm.\n\n"
+            "Mua hàng xong em add chị vào group luôn. "
+            "Nhiều ý tưởng setup bếp hay lắm"
+        ),
+        quick_replies=["Đặt hàng", "Xem combo", "Xem hình"],
+    ),
+
+    # 41. CHUN STORE LÀ GÌ / BÁN GÌ
+    Scenario(
+        keywords=[
+            "bán gì", "chun store là gì", "shop bán gì", "bán cái gì",
+            "ban gi", "là shop gì", "giới thiệu",
+        ],
+        response=(
+            "Chun Store chuyên đồ gia dụng Hàn Quốc giúp bếp gọn đẹp nha chị!\n\n"
+            "Bên em có 3 sản phẩm chính: "
+            "khay tổ chức tủ lạnh, kệ gia vị dán tường không khoan, "
+            "và hộp gia vị xoay 360°.\n\n"
+            "Chị đang cần gì để em tư vấn?"
+        ),
+        quick_replies=["Xem bảng giá", "Xem combo", "Xem hình"],
+    ),
+
+    # 42. NHẮN LẠI SAU / BẬN
+    Scenario(
+        keywords=[
+            "nhắn lại sau", "bận", "đang bận", "lát nữa", "tí nữa",
+            "chút nữa", "nhan lai sau", "dang ban", "lát nhắn lại",
+            "mai nhắn", "tối nhắn",
+        ],
+        response=(
+            "Ok chị, cứ từ từ! Khi nào rảnh nhắn em nha, em online 8h-21h hàng ngày"
+        ),
+        quick_replies=["Xem bảng giá", "Xem combo"],
+    ),
+
+    # 43. GỬI HÌNH BẾP / TỦ LẠNH
+    Scenario(
+        keywords=[
+            "gửi hình bếp", "bếp nhà em", "tủ lạnh nhà em",
+            "nhà em", "bếp em", "xem bếp", "gửi ảnh bếp",
+        ],
+        response=(
+            "Chị gửi hình bếp/tủ lạnh nhà chị đi, em xem rồi tư vấn SP phù hợp nha!\n\n"
+            "Biết size bếp + style chị thích thì em recommend chính xác hơn"
+        ),
+        quick_replies=["Xem combo", "Xem giá", "Xem hình before/after"],
+    ),
+
+    # 44. HỎI VỀ CSKH SAU MUA
+    Scenario(
+        keywords=[
+            "sau mua", "sau khi mua", "hậu mãi", "chăm sóc",
+            "cskh", "customer service", "hỗ trợ sau mua",
+        ],
+        response=(
+            "Sau khi mua em chăm sóc 7 ngày liền nha chị:\n"
+            "- Ngày 1: hỏi chị nhận hàng ổn không\n"
+            "- Ngày 3: hỏi dùng có ok không, cần hỗ trợ gì\n"
+            "- Ngày 7: hỏi feedback, mời vào group Bếp Hàn Việt\n\n"
+            "Có vấn đề gì chị nhắn em bất cứ lúc nào"
+        ),
+        quick_replies=["Đặt hàng", "Xem combo", "Xem giá"],
+    ),
+
+    # ═══════════════════════════════════════════
+    # NHÓM 7: LIÊN HỆ & HỖ TRỢ
+    # ═══════════════════════════════════════════
+
+    # 45. SĐT / HOTLINE
     Scenario(
         keywords=[
             "sdt", "số điện thoại", "hotline", "liên hệ", "gọi",
@@ -431,7 +771,7 @@ SCENARIOS: list[Scenario] = [
         quick_replies=["Xem giá", "Đặt hàng", "Hỏi thêm"],
     ),
 
-    # 24. BẾP NHỎ / BẾP BỪA
+    # 46. BẾP NHỎ / BẾP BỪA
     Scenario(
         keywords=[
             "bếp nhỏ", "bếp chật", "bếp bừa", "bừa bộn", "ngán",
@@ -450,10 +790,10 @@ SCENARIOS: list[Scenario] = [
     ),
 
     # ═══════════════════════════════════════════
-    # NHÓM 7: CHÀO HỎI & KẾT THÚC (ưu tiên thấp)
+    # NHÓM 8: CHÀO HỎI & KẾT THÚC (ưu tiên thấp)
     # ═══════════════════════════════════════════
 
-    # 25. CHÀO HỎI
+    # 47. CHÀO HỎI
     Scenario(
         keywords=[
             "chào", "hello", "hi", "alo", "halo", "ơi", "cho hỏi",
@@ -467,7 +807,7 @@ SCENARIOS: list[Scenario] = [
         quick_replies=["Xem bảng giá", "Xem combo", "Tư vấn thêm", "Thông tin ship"],
     ),
 
-    # 26. CẢM ƠN
+    # 48. CẢM ƠN
     Scenario(
         keywords=[
             "cảm ơn", "cám ơn", "thanks", "tks", "thank", "cam on",
@@ -480,7 +820,7 @@ SCENARIOS: list[Scenario] = [
         quick_replies=["Đặt hàng", "Xem bảng giá", "Xem combo"],
     ),
 
-    # 27. TẠM BIỆT
+    # 49. TẠM BIỆT
     Scenario(
         keywords=[
             "tạm biệt", "bye", "bb", "bai", "tạm", "goodbye",
@@ -493,7 +833,7 @@ SCENARIOS: list[Scenario] = [
         quick_replies=["Xem bảng giá", "Xem combo"],
     ),
 
-    # 28. OK / ĐỒNG Ý
+    # 50. OK / ĐỒNG Ý
     Scenario(
         keywords=[
             "ok", "oke", "oki", "okie", "được", "dc", "ờ", "ừ",
@@ -506,7 +846,7 @@ SCENARIOS: list[Scenario] = [
         quick_replies=["Xem bảng giá", "Đặt hàng", "Xem combo", "Tư vấn thêm"],
     ),
 
-    # 29. KHÔNG HIỂU / HỎI LẠI
+    # 51. KHÔNG HIỂU / HỎI LẠI
     Scenario(
         keywords=[
             "không hiểu", "gì", "hả", "sao", "nói lại",
