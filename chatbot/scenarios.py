@@ -327,10 +327,166 @@ SCENARIOS: list[Scenario] = [
     ),
 
     # ═══════════════════════════════════════════
-    # NHÓM 5: LIÊN HỆ & HỖ TRỢ
+    # NHÓM 5: XỬ LÝ TỪ CHỐI (Chris Voss — Straight Line)
+    # Nguồn: 2 Sơ Đồ Vận Hành/Phòng Ban/Chris Voss (Chốt Đơn & CSKH).md
     # ═══════════════════════════════════════════
 
-    # 15. SĐT / HOTLINE
+    # 15. "ĐẮT QUÁ" → So sánh giá trị dài hạn
+    Scenario(
+        keywords=[
+            "đắt quá", "mắc quá", "đắt", "mắc", "giá cao", "chát",
+            "đắt vậy", "mắc vậy", "sao đắt", "giá cao quá",
+            "dat qua", "mac qua", "nhieu tien qua",
+        ],
+        response=(
+            "Dạ em hiểu chị lo về giá ạ! 😊\n\n"
+            "Nhưng chị tính thử nha:\n"
+            "• Mua hàng chợ 50-70K → dùng 2-3 tháng hỏng → mua lại\n"
+            "• Chun Store 89-149K → dùng 2-3 năm, an toàn thực phẩm\n\n"
+            "Tính ra Chun Store rẻ hơn nhiều ạ 💰\n\n"
+            "Với lại combo 3 SP chỉ 419K — tiết kiệm 30% + freeship + quà tặng.\n"
+            "Chị xem combo thử không ạ?"
+        ),
+        quick_replies=["🎁 Xem combo tiết kiệm", "💰 Xem bảng giá", "📸 Xem review KH"],
+    ),
+
+    # 16. "ĐỂ SUY NGHĨ" → Hỏi calibrated question
+    Scenario(
+        keywords=[
+            "suy nghĩ", "để suy nghĩ", "tính đã", "xem đã", "coi đã",
+            "để tính", "nghĩ đã", "chưa quyết", "phân vân",
+            "suy nghi", "chua quyet",
+        ],
+        response=(
+            "Dạ vâng ạ, chị cứ suy nghĩ nhé! 😊\n\n"
+            "Em hỏi nhỏ: Điều gì khiến chị còn phân vân ạ?\n"
+            "• Giá cả?\n"
+            "• Chất lượng?\n"
+            "• Hay chưa biết chọn sản phẩm nào?\n\n"
+            "Chị chia sẻ để em tư vấn đúng hơn ạ 🥰"
+        ),
+        quick_replies=["💰 Lo về giá", "❓ Lo về chất lượng", "🎁 Chưa biết chọn gì"],
+    ),
+
+    # 17. "SHOPEE RẺ HƠN" → Stack value
+    Scenario(
+        keywords=[
+            "shopee rẻ hơn", "lazada rẻ hơn", "mua shopee", "trên shopee",
+            "bên kia rẻ hơn", "chỗ khác rẻ hơn", "rẻ hơn",
+        ],
+        response=(
+            "Dạ chị ơi, em hiểu ạ! Shopee có hàng rẻ hơn thật 😊\n\n"
+            "Nhưng mua Chun Store chị được thêm:\n"
+            "✅ Hàng Hàn Quốc chính hãng — không lo BPA\n"
+            "✅ Đổi trả 7 ngày — không ưng hoàn tiền\n"
+            "✅ CSKH 7 ngày sau mua — em hỏi thăm chị\n"
+            "✅ Video hướng dẫn setup bếp đẹp\n"
+            "✅ Ebook \"7 ngày bếp đẹp kiểu Hàn\"\n\n"
+            "Chênh vài chục K nhưng an tâm hơn nhiều ạ.\n"
+            "Chị muốn xem combo tiết kiệm không?"
+        ),
+        quick_replies=["🎁 Xem combo", "📸 Xem review KH", "🛒 Đặt hàng"],
+    ),
+
+    # 18. "HỎI CHỒNG" → Gửi bảng so sánh
+    Scenario(
+        keywords=[
+            "hỏi chồng", "hỏi vợ", "hỏi ông xã", "bàn với chồng",
+            "bàn với vợ", "để hỏi", "hỏi gia đình",
+        ],
+        response=(
+            "Dạ chị cứ bàn với anh nhà nhé! 😊\n\n"
+            "Em gửi chị tóm tắt để chồng xem nhanh:\n\n"
+            "🏠 Chun Store — Đồ gia dụng Hàn Quốc\n"
+            "💰 Combo 3 SP: 419K (tiết kiệm 30%)\n"
+            "🚚 Freeship + COD (nhận hàng mới trả)\n"
+            "🔄 Đổi trả 7 ngày nếu không ưng\n\n"
+            "Khi nào anh chị quyết, nhắn em đặt ngay ạ! 🥰"
+        ),
+        quick_replies=["🛒 Đặt hàng", "📋 Xem bảng giá", "🎁 Xem combo"],
+    ),
+
+    # 19. "HẾT TIỀN" → Downsale
+    Scenario(
+        keywords=[
+            "hết tiền", "không có tiền", "chưa có tiền", "tiền không đủ",
+            "eo hẹp", "lương chưa về", "cuối tháng",
+            "het tien", "khong co tien",
+        ],
+        response=(
+            "Dạ em hiểu chị ạ! 😊\n\n"
+            "Chị không cần mua combo ngay — mua lẻ 1 sản phẩm trước cũng được:\n\n"
+            "🧊 Khay tủ lạnh chỉ từ 89K\n"
+            "🔩 Kệ dán tường từ 129K\n\n"
+            "Dùng thấy ưng rồi mua thêm sau cũng không muộn ạ!\n"
+            "Với lại ship COD — nhận hàng mới trả tiền, không cần chuyển khoản trước 😊"
+        ),
+        quick_replies=["🧊 Xem khay 89K", "🔩 Xem kệ 129K", "💰 Xem bảng giá"],
+    ),
+
+    # 20. "CHƯA CẦN" → Nurture
+    Scenario(
+        keywords=[
+            "chưa cần", "không cần", "chưa muốn mua", "không muốn",
+            "thôi", "không mua", "thôi khỏi", "ko cần", "k cần",
+            "chua can", "khong can",
+        ],
+        response=(
+            "Dạ vâng ạ, không sao chị! 😊\n\n"
+            "Em giữ liên lạc nhé — khi nào chị cần em hỗ trợ ngay ạ.\n\n"
+            "💡 Tip nhỏ: Nhiều chị bắt đầu bằng 1 khay tủ lạnh 89K thôi, "
+            "dùng thấy sướng rồi mua thêm dần. "
+            "Không cần setup cả bếp 1 lúc đâu ạ 😄\n\n"
+            "Chúc chị ngày vui vẻ! 🌸"
+        ),
+        quick_replies=["📋 Xem bảng giá", "🎁 Xem combo", "📸 Xem hình thực tế"],
+    ),
+
+    # 21. "ĐÃ CÓ RỒI" → So sánh
+    Scenario(
+        keywords=[
+            "có rồi", "mua rồi", "đã có", "dùng rồi", "xài rồi",
+            "có hết rồi", "co roi", "da co",
+        ],
+        response=(
+            "Ồ chị đã có rồi ạ! Chị dùng hãng nào vậy? 🤔\n\n"
+            "Nếu chị thấy:\n"
+            "• Nhựa bắt đầu ố vàng → nhựa PP Hàn bền hơn\n"
+            "• Kệ dán bong → keo nano Chun Store chịu 5kg\n"
+            "• Muốn nâng cấp bếp đẹp hơn → combo đồng bộ tone trắng/gỗ\n\n"
+            "Hoặc chị mua tặng bạn bè/người thân cũng hay ạ — "
+            "nhiều chị mua xong còn mua thêm tặng mẹ 🥰"
+        ),
+        quick_replies=["🎁 Xem combo tặng", "💰 Xem giá", "📸 Xem hình"],
+    ),
+
+    # 22. "KHÔNG TIN" → Social proof
+    Scenario(
+        keywords=[
+            "không tin", "lừa đảo", "scam", "giả", "sợ lừa",
+            "có thật không", "có uy tín không", "tin được không",
+            "co that khong", "lua dao",
+        ],
+        response=(
+            "Dạ em hiểu chị lo ạ — mua online phải cẩn thận! 😊\n\n"
+            "Chun Store cam kết:\n"
+            "✅ Ship COD — nhận hàng mới trả tiền, không rủi ro\n"
+            "✅ Đổi trả 7 ngày — không ưng hoàn tiền\n"
+            "✅ Quay video unbox khi nhận — có vấn đề em đổi ngay\n"
+            "✅ Hàng Hàn Quốc nhập khẩu chính hãng\n\n"
+            "⭐ Feedback từ khách:\n"
+            "• \"Hàng y hình, đóng gói cẩn thận\" — Chị Linh, HN\n"
+            "• \"Mua lần 2 tặng mẹ luôn\" — Chị Trang, ĐN\n\n"
+            "Chị cứ đặt thử — nhận hàng không ưng em hoàn tiền ạ!"
+        ),
+        quick_replies=["🛒 Đặt hàng COD", "📸 Xem thêm review", "💰 Xem giá"],
+    ),
+
+    # ═══════════════════════════════════════════
+    # NHÓM 6: LIÊN HỆ & HỖ TRỢ
+    # ═══════════════════════════════════════════
+
+    # 23. SĐT / HOTLINE
     Scenario(
         keywords=[
             "sdt", "số điện thoại", "hotline", "liên hệ", "gọi",
